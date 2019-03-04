@@ -16,6 +16,6 @@ def test_binary_search():
     assert lower_bound(a, 3) == 3
     assert lower_bound(a, 10) == 10
     assert lower_bound(a, 9) == 9
-
     assert lower_bound(a, 0) == 0
+
     assert lower_bound(a, 9) == 9
