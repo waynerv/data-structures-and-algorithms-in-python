@@ -23,7 +23,7 @@ def selection_sort(seq):
         for j in range(i + 1, n):  # 从i之后开始找到最小的元素，一直找到最后一个元素
             if seq[j] < seq[min_index]:
                 min_index = j  # 循环结束后得到最小元素的下标
-        if min_index != i:  # 如果最小的元素不是当前下标的元素，则交换
+        if min_index != i:  # 如果最小的元素不是当前下标的元素，则交换位置
             seq[i], seq[min_index] = seq[min_index], seq[i]
 
 

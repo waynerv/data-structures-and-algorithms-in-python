@@ -3,7 +3,7 @@ def lower_bound(array, value):  # 返回[first, last)内第一个不小于value�
     last = len(array)
     while first < last:  # 搜索区间[first, last)不为空
         mid = first + (last - first) // 2  # 防溢出
-        if array[mid] < value:
+        if array[mid] < value: # 要找第一个不小于value的值，所以此处应该为小于符号
             first = mid + 1
         else:
             last = mid

@@ -33,17 +33,17 @@ class LRUCache(object):
         self._ordered_dict = OrderedDict()
         self._capacity = capacity
 
-    def get(self, key: int) -> int:
+    def get(self, key: int) -> int:  # 取回值，假定值存在，若不存在返回-1
         self._move_to_end_if_exist(key)
 
         return self._ordered_dict.get(key, -1)
 
-    def put(self, key: int, value: int) -> None:
+    def put(self, key: int, value: int) -> None:  # 添加或更新键值对
         self._move_to_end_if_exist(key)
 
         self._ordered_dict[key] = value
         if len(self._ordered_dict) > self._capacity:
-            self._ordered_dict.popitem(last=False)  # # popitem支持弹出头部或尾部
+            self._ordered_dict.popitem(last=False)  # popitem支持弹出头部或尾部
 
     def _move_to_end_if_exist(self, key: int) -> None:
         if key in self._ordered_dict:

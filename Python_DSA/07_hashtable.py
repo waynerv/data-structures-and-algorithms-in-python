@@ -23,7 +23,7 @@ class Array(object):
 
 class Slot(object):
     """定义一个 hash 表 数组的槽
-        注意，一个槽有三种状态，看你能否想明白。相比链接法解决冲突，二次探查法删除一个 key 的操作稍微复杂。
+        注意，一个槽有三种状态或者说三种值。相比链接法解决冲突，二次探查法删除一个 key 的操作稍微复杂。
         1.从未使用过，值为HashMap.UNUSED（None）。此槽没有被使用和冲突过，查找时只要找到 UNUSED 就不用再继续探查了
         2.使用过但是 remove 了，此时值为 HashMap.EMPTY，该探查点后边的元素仍可能是有key
         3.槽正在使用 Slot 节点
