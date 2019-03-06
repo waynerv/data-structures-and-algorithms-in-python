@@ -7,9 +7,11 @@ def merge_sort(seq):
         return seq
     else:
         mid = n // 2
+        # 递归的对左右部分进行分割排序
         left_part = merge_sort(seq[:mid])
         right_part = merge_sort(seq[mid:])
 
+        # 合并排序后的左右部分
         new_seq = merge_two_part(left_part, right_part)
         return new_seq
 
