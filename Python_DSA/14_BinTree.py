@@ -48,7 +48,7 @@ class BinTreeNode(object):
         self.data, self.left, self.right = data, left, right
 
 
-class Bintree(object):
+class BinTree(object):
     def __init__(self, root=None):
         self.root = root
 
@@ -97,16 +97,29 @@ class Bintree(object):
 
     def preorder_trav_use_stack(self, node):
         s = Stack()
-        while node or s.empty() is not None:
+        while node or not s.empty():  # 循环重复整个过程
+            while node:  # 不断往左子树遍历
+                print(node.data) # 先序处理节点
+                s.push(node)  # 第一次遇到节点
+                node = node.left
+            if s.empty() is not None:  # 左子树为空时回到上一节点往右子树遍历
+                node = s.pop()  # 回到上一个节点的方式，第二次遇到节点
+                node = node.right  # 从上一个节点的右边开始遍历
+
+    def inorder_trav_use_stack(self, node):
+        s = Stack()
+        while node or not s.empty():
             while node:
                 print(node.data)
                 s.push(node)
                 node = node.left
             if s.empty() is not None:
                 node = s.pop()
+                print(node.data) # 中序处理节点
                 node = node.right
 
-
+    def postorder_trav_use_stack(self, node):
+        pass
 
     def layer_trav_use_queue(self, node):
         """使用队列进行层序遍历"""
@@ -145,10 +158,23 @@ class Bintree(object):
         :return:
         """
         if node is not None:
-            node.left, node.right = node.right, node.left
+            node.left, node.right = node.right, node.left  # 交换在函数中的位置前后都可以
             self.reverse(node.left)
             self.reverse(node.right)
 
 
-btree = Bintree.build_from(node_list)
+btree = BinTree.build_from(node_list)
+print('====先序遍历=====')
 btree.preorder_trav(btree.root)
+
+print('====使用 stack 实现先序遍历=====')
+btree.preorder_trav_use_stack(btree.root)
+
+print('====用堆栈层序遍历=====')
+btree.layer_trav_use_queue(btree.root)
+print('====用列表层序遍历=====')
+btree.layer_trav_use_list(btree.root)
+
+btree.reverse(btree.root)
+print('====反转之后的结果=====')
+btree.layer_trav_use_queue(btree.root)

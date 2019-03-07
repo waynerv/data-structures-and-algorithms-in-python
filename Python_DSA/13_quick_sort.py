@@ -20,7 +20,7 @@ def test_quicksort():
 
 
 def quicksort_inplace(array, beg, end):  # 注意这里我们都用左闭右开区间，end 传入 len(array)
-    if beg < end:  # beg == end 的时候递归出口
+    if beg < end - 1:  # beg == end-1 的时候递归出口
         pivot = partition(array, beg, end)
         quicksort_inplace(array, beg, pivot)
         quicksort_inplace(array, pivot + 1, end)
@@ -36,7 +36,7 @@ def partition(array, beg, end):
         # 从左边找到比 pivot 大的
         while left <= right and array[left] < pivot:
             left += 1
-        # 从右边找到比 pivot 小的
+        # 从右边找到比 pivot 小的, 注意停止循环的条件
         while right >= left and array[right] >= pivot:
             right -= 1
 
@@ -76,10 +76,10 @@ def findkth(array, beg, end, k):
     index = partition_desc(array, beg, end)
     if index == k - 1:
         return array[index]
-    if index < k - 1:
+    elif index < k - 1:
         return findkth(array, index + 1, end, k)
     else:
-        return findkth(array, beg, index - 1, k)
+        return findkth(array, beg, index, k)
 
 
 def test_partition():
@@ -97,6 +97,5 @@ def test_quicksort_inplace():
     sorted_seq = sorted(seq)
     quicksort_inplace(seq, 0, len(seq))
     assert sorted_seq == seq
-    print(seq)
 
     assert findkth(seq, 0, len(seq), 3) == 7
