@@ -1,6 +1,4 @@
-def lower_bound(array, value):  # 返回[first, last)内第一个不小于value的值的位置
-    first = 0
-    last = len(array)
+def lower_bound(array, first, last, value):  # 返回[first, last)内第一个不小于value的值的位置
     while first < last:  # 搜索区间[first, last)不为空
         mid = first + (last - first) // 2  # 防溢出
         if array[mid] < value: # 要找第一个不小于value的值，所以此处应该为小于符号
@@ -13,9 +11,9 @@ def lower_bound(array, value):  # 返回[first, last)内第一个不小于value�
 def test_binary_search():
     a = list(range(10))
 
-    assert lower_bound(a, 3) == 3
-    assert lower_bound(a, 10) == 10
-    assert lower_bound(a, 9) == 9
-    assert lower_bound(a, 0) == 0
+    assert lower_bound(a, 0, 10, 3) == 3
+    assert lower_bound(a, 0, 10, 10) == 10
+    assert lower_bound(a, 0, 10, 9) == 9
+    assert lower_bound(a, 0, 10, 0) == 0
 
-    assert lower_bound(a, 9) == 9
+    assert lower_bound(a, 0, 10, 9) == 9
