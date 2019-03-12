@@ -36,7 +36,7 @@ def test_selection_sort():
 
 def insertion_sort(seq):
     n = len(seq)
-    for i in range(1, n):  # 元素为0个或1个时是有序的
+    for i in range(1, n):  # 从第二个元素开始遍历
         value = seq[i]  # 取出当前位置元素的值
         pos = i  # 找到这个值的合适位置，使得前边的数组有序 [0,i] 有序
         while pos > 0 and value < seq[pos - 1]:  # 比较取出值与前面的元素值，如果取出值跟小，继续前移
