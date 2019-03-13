@@ -69,13 +69,23 @@ class MaxHeap(object):
             self._siftdown(largest)
 
 
-def test_maxheap():
-    import random
-    n = 10
-    h = MaxHeap(n)
-    mylist = list(range(n))
-    random.shuffle(mylist)
-    for i in mylist:
-        h.add(i)
-    for i in reversed(range(n)):
-        assert i == h.extract()
+class PriorityQueue(object):
+    def __init__(self, maxsize):
+        self.maxsize = maxsize
+        self._maxheap = MaxHeap(maxsize)
+
+    def push(self, priority, value):
+        # 注意这里把这个 tuple push 进去，python 比较 tuple 从第一个开始比较
+        # 这样就实现了按照优先级排序
+        entry = (priority, value)
+        self._maxheap.add(entry)  # 入队的时候会根据 priority 维持堆的特性
+
+    def pop(self, with_priority=False):
+        entry = self._maxheap.extract()
+        if with_priority:
+            return entry
+        else:
+            return entry[1]
+
+    def is_empty(self):
+        return len(self._maxheap) == 0
