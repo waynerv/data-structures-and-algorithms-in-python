@@ -9,6 +9,7 @@ class TopK(object):
         如果当前元素小于堆顶元素，跳过该元素（肯定不是前 k 大）
         否则替换堆顶元素为当前元素，并重新调整堆
     """
+
     def __init__(self, iterable, k):
         self.minheap = []
         self.capacity = k

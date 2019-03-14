@@ -99,7 +99,7 @@ class BinTree(object):
         s = Stack()
         while node or not s.empty():  # 循环重复整个过程
             while node:  # 不断往左子树遍历
-                print(node.data) # 先序处理节点
+                print(node.data)  # 先序处理节点
                 s.push(node)  # 第一次遇到节点
                 node = node.left
             if s.empty() is not None:  # 左子树为空时回到上一节点往右子树遍历
@@ -115,7 +115,7 @@ class BinTree(object):
                 node = node.left
             if s.empty() is not None:
                 node = s.pop()
-                print(node.data) # 中序处理节点
+                print(node.data)  # 中序处理节点
                 node = node.right
 
     def postorder_trav_use_stack(self, node):
