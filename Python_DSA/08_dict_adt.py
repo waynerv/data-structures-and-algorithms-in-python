@@ -154,6 +154,12 @@ class DictADT(HashTable):
             if slot not in (HashTable.EMPTY, HashTable.UNUSED):
                 yield slot
 
+    def pop(self, key, default):
+        if default and key not in self:
+            return default
+        else:
+            return self.remove(key)
+
     def items(self):
         for slot in self._iter_slot():
             yield (slot.key, slot.value)

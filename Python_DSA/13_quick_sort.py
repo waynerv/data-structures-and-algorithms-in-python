@@ -20,7 +20,9 @@ def test_quicksort():
 
 
 def quicksort_inplace(array, beg, end):  # 注意这里我们都用左闭右开区间，end 传入 len(array)
-    if beg < end - 1:  # beg == end-1 的时候递归出口
+    # If the length of the list is less than or equal to one, it is already sorted.
+    # If it is greater, then it can be partitioned and recursively sorted.
+    if beg < end - 1:  # 当序列元素小于或等于1时，序列已经是有序的，不需要再继续进行递归的快排操作（原地进行）
         pivot = partition(array, beg, end)
         quicksort_inplace(array, beg, pivot)
         quicksort_inplace(array, pivot + 1, end)

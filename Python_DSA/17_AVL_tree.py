@@ -231,7 +231,7 @@ class AVLTree(BST):
             else:
                 p = p.right
 
-        # p_parent 是插入点的父节点， a_parent,a 记录最小非平衡树
+        # 插入新节点，p_parent 是插入点的父节点， a_parent,a 记录最小非平衡树
         node = AVLNode(key, value)
         if key < p_parent.key:
             p_parent.left = node  # 作为左子节点插入
