@@ -26,9 +26,12 @@ class PriorityQueue(object):
 
     def pop_task(self):
         """删除并返回最小优先级任务，如果队列已空Raise KeyError"""
-        while self.pq:
+        while self.pq:  # 循环直到弹出值不为REMOVED的task才返回
             priority, count, task = heapq.heappop(self.pq)
             if task is not PriorityQueue.REMOVED:
                 del self.entry_finder[task]
                 return task
         raise KeyError('pop from an empty priority queue')
+
+    def is_empty(self):
+        return len(self.entry_finder) == 0
