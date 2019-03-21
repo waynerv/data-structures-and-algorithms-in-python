@@ -7,7 +7,7 @@ class PriorityQueue(object):
 
     def __init__(self):
         self.pq = []  # 初始化heapq所使用的list
-        self.entry_finder = {}  # 任务到优先级条目的映射
+        self.entry_finder = {}  # 任务到优先级条目的映射,用来快速的在队列中找到任务对应优先级条目
         self.counter = itertools.count()  # 唯一计数器
 
     def add_task(self, task, priority=0):
@@ -35,6 +35,9 @@ class PriorityQueue(object):
 
     def is_empty(self):
         return len(self.entry_finder) == 0
+
+    def __contains__(self, item):
+        return item in self.entry_finder
 
 
 class Vertex:
@@ -133,23 +136,20 @@ class Graph:
         return iter(self.vertList.values())
 
 
-def dijkstra(graph, start):
-    # 用图中的节点构建优先级队列
+def prim(graph, start):
     pq = PriorityQueue()
     start.setDistance(0)
     pq_list = [(v, v.getDistance()) for v in graph]
     for v, priority in pq_list:
         pq.add_task(v, priority)
-    # 从队列中取出路径长度最小的顶点，更新其邻居节点的距离
     while not pq.is_empty():
         currentVert = pq.pop_task()
         for nextVert in currentVert.getConnections():
-            newDist = currentVert.getDistance() + currentVert.getWeight(nextVert)
-            if newDist < nextVert.getDistance():
+            newDist = currentVert.getWeight(nextVert)
+            if nextVert in pq and newDist < nextVert.getDistance():
                 nextVert.setDistance(newDist)
                 nextVert.setPred(currentVert)
-                pq.add_task(nextVert, newDist)  # 通过此方法更新队列中任务的优先级
-
+                pq.add_task(nextVert, newDist)
 
 def create_graph():
     g = Graph()
@@ -170,6 +170,6 @@ def create_graph():
 
 graph = create_graph()
 start = graph.getVertex(1)
-dijkstra(graph, start)
+prim(graph, start)
 for v in graph:
     print("( %s , %s )" % (v.getId(), v.getPred()))
