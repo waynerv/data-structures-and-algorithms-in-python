@@ -4,9 +4,9 @@ url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 verify_ssl = true
 
 [dev-packages]
+pylint = "*"
 
 [packages]
-pytext = "*"
 pytest = "*"
 
 [requires]
