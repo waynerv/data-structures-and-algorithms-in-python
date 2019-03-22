@@ -1,4 +1,149 @@
-[TOC]
+  - [01 抽象数据类型和面向对象编程](#01-)
+  - [02 数组和列表](#02-)
+    - [array](#array)
+    - [list](#list)
+    - [用list实现Array ADT](#listarray-adt)
+  - [03 链表](#03-)
+    - [单链表](#)
+    - [循环双端链表](#-1)
+    - [LRU Cache](#lru-cache)
+  - [04 队列](#04-)
+    - [单链表实现](#-2)
+    - [数组实现](#-3)
+    - [用list实现队列](#list-1)
+    - [双端队列 Double ended Queue](#-double-ended-queue)
+  - [05 栈](#05-)
+    - [使用双端链表实现](#-4)
+    - [使用数组实现](#-5)
+  - [06 算法分析](#06-)
+    - [常用时间复杂度](#-6)
+    - [常见复杂度增长趋势](#-7)
+  - [07 哈希表](#07-)
+    - [冲突及解决策略](#-8)
+    - [扩容](#-9)
+      - [装载因子](#-10)
+      - [重哈希](#-11)
+    - [使用数组实现ADT](#adt)
+      - [关键理解](#-12)
+  - [08 字典](#08-)
+    - [Hashable](#hashable)
+  - [09 集合](#09-)
+    - [ADT实现](#adt-1)
+    - [python frozenset](#python-frozenset)
+    - [BloomFilter布隆过滤器](#bloomfilter)
+      - [Bloom Filter 算法](#bloom-filter-)
+  - [10 递归](#10-)
+    - [用栈模拟递归](#-13)
+    - [尾递归](#-14)
+    - [汉诺塔问题](#-15)
+- [输出](#-16)
+  - [11 线性查找与二分查找](#11-)
+    - [线性查找](#-17)
+    - [二分查找](#-18)
+      - [等值查找](#-19)
+    - [求上下界](#-20)
+  - [12 基本排序算法](#12-)
+    - [冒泡排序](#-21)
+      - [原理](#-22)
+      - [代码实现](#-23)
+      - [算法分析](#-24)
+    - [选择排序](#-25)
+      - [原理](#-26)
+      - [代码实现](#-27)
+      - [算法分析](#-28)
+    - [插入排序](#-29)
+      - [原理](#-30)
+      - [代码实现](#-31)
+      - [算法分析](#-32)
+    - [希尔排序](#-33)
+      - [原理](#-34)
+      - [代码实现](#-35)
+      - [算法分析](#-36)
+  - [13 高级排序算法](#13-)
+    - [分治法](#-37)
+    - [归并排序](#-38)
+      - [归并两个有序数组](#-39)
+      - [算法分析](#-40)
+    - [快速排序](#-41)
+      - [基础版本](#-42)
+      - [改良版本](#-43)
+      - [算法分析](#-44)
+    - [无序数组寻找第 k 大的数字](#-k-)
+    - [排序总结](#-45)
+  - [14 树与二叉树](#14-)
+    - [二叉树的表示](#-46)
+      - [构造二叉树](#-47)
+    - [二叉树的遍历](#-48)
+      - [递归实现](#-49)
+      - [非递归实现](#-50)
+    - [二叉树层序遍历](#-51)
+    - [反转二叉树](#-52)
+  - [15 堆和堆排序](#15-)
+    - [堆的概念](#-53)
+    - [堆的操作](#-54)
+    - [堆的表示](#-55)
+    - [实现一个最大堆](#-56)
+    - [实现一个最小堆](#-57)
+    - [实现堆排序](#-58)
+      - [倒序排序](#-59)
+      - [正序排序](#-60)
+      - [原地正序排序](#-61)
+    - [Python 里的 heapq 模块](#python--heapq-)
+      - [heapq 的特性](#heapq-)
+      - [heapq 的常用方法](#heapq--1)
+    - [Top K 问题](#top-k-)
+  - [16 优先级队列](#16-)
+      - [基本实现](#-62)
+    - [进阶实现](#-63)
+      - [解决方案](#-64)
+  - [17 二叉查找树](#17-)
+    - [二叉查找树定义](#-65)
+    - [构造一个BST](#bst)
+    - [BST 操作](#bst-)
+      - [查找](#-66)
+      - [获取最大和最小key的节点](#key)
+      - [插入](#-67)
+      - [递归实现](#-68)
+      - [非递归实现](#-69)
+    - [删除节点](#-70)
+      - [删除叶节点](#-71)
+      - [删除只有一个孩子的节点](#-72)
+      - [删除有两个孩子的内部节点](#-73)
+      - [代码实现](#-74)
+    - [时间复杂度分析](#-75)
+    - [平衡二叉树](#-76)
+      - [平衡二叉树定义](#-77)
+      - [ADT实现](#adt-2)
+    - [B 树与B+ 树](#b-b-)
+      - [B 树](#b-)
+      - [B+树](#b)
+    - [红黑树](#-78)
+      - [红黑树特性](#-79)
+      - [红黑树与AVL树的比较](#avl)
+  - [18 图与图的遍历](#18-)
+    - [有向图的表示](#-80)
+      - [邻接矩阵](#-81)
+      - [邻接表](#-82)
+    - [使用邻接表实现图的ADT](#adt-3)
+      - [实现 Vertex 类](#-vertex-)
+      - [实现Graph类](#graph)
+    - [图的遍历](#-83)
+      - [BFS 广度优先搜索](#bfs-)
+      - [DFS 深度优先搜索](#dfs-)
+    - [拓扑排序](#-84)
+      - [实际问题](#-85)
+      - [算法思想](#-86)
+      - [代码实现](#-87)
+    - [最短路径问题与 Dijkstra 算法](#-dijkstra-)
+      - [单源最短路径](#-88)
+      - [Dijkstra 算法](#dijkstra-)
+    - [最小生成树问题与 Prim 算法](#-prim-)
+      - [最小生成树](#-89)
+      - [Prim 算法](#prim-)
+      - [代码实现](#-90)
+  - [19 Python 常用内置算法和数据结构](#19-python-)
+  - [20 参考](#20-)
+
 
 ## 01 抽象数据类型和面向对象编程
 
@@ -6,7 +151,7 @@
 
 1. 选择哪种数据结构来存储数据？
 2. 选中的数据结构是否能支持需要进行的操作？
-3. 选用数据结构的效率（时间空间复杂度）。
+3. 选用数据结构的效率（时间与空间复杂度）。
 
 ## 02 数组和列表
 
@@ -16,7 +161,7 @@ python内置有array类型，但使用限制较多，仅支持同一数据类型
 
 ### list
 
-[list的底层C实现](http://python.jobbole.com/82549/)，应该是基于动态数组实现（根据元素数量自动调整大小），CPython实现中， lists 是指向列表对象的指针组成的array数组。各个操作的时间复杂度如下：
+[list的底层C实现](http://python.jobbole.com/82549/)，基于动态数组实现（根据元素数量自动调整大小），CPython实现中， lists 是指向列表对象的指针组成的array数组。各个操作的时间复杂度如下：
 
 | 操作                                  | 平均时间复杂度 |
 | ------------------------------------- | -------------- |
@@ -370,7 +515,7 @@ def fib(n):
 参考文章：
 
 - [How to implement LRU cache using HashMap and Doubly Linked List](https://medium.com/@krishankantsinghal/my-first-blog-on-medium-583159139237)
-- [[使用Python collections内置的OrderedDict实现LRU](https://docs.python.org/3.7/library/collections.html#collections.OrderedDict) objects](https://docs.python.org/3.7/library/collections.html#ordereddict-objects)
+- [使用Python collections内置的OrderedDict实现LRU](https://docs.python.org/3.7/library/collections.html#ordereddict-objects)
 
 ## 04 队列
 
@@ -530,16 +675,20 @@ class Stack:
 
 ### 常用时间复杂度
 
-| O           | 名称         | 举例               |
-| ----------- | ------------ | ------------------ |
-| 1           | 常量时间     | 一次赋值           |
-| log*n*log⁡n  | 对数时间     | 折半查找           |
-| *n*n        | 线性时间     | 线性查找           |
-| nlog*n*log⁡n | 对数线性时间 | 快速排序           |
-| *n*2n2      | 平方         | 两重循环           |
-| *n*3n3      | 立方         | 三重循环           |
-| 2*n*2n      | 指数         | 递归求斐波那契数列 |
-| *n*!n!      | 阶乘         | 旅行商问题         |
+| O       | 名称         | 举例               |
+| ------- | ------------ | ------------------ |
+| 1       | 常量时间     | 一次赋值           |
+| log*n*  | 对数时间     | 折半查找           |
+| n       | 线性时间     | 线性查找           |
+| nlog*n* | 对数线性时间 | 快速排序           |
+| n^2^    | 平方         | 两重循环           |
+| n^3^    | 立方         | 三重循环           |
+| 2^n^    | 指数         | 递归求斐波那契数列 |
+| *n*!    | 阶乘         | 旅行商问题         |
+
+### 常见复杂度增长趋势
+
+![function_growth](assets/function_growth.png)
 
 ## 07 哈希表
 
@@ -827,7 +976,7 @@ class SetADT(HashTable):
 
 对于字符串str，分别计算h（1，str），h（2，str）…… h（k，str）。然后将BitSet的第h（1，str）、h（2，str）…… h（k，str）位设为1。这样就将字符串str映射到BitSet中的k个二进制位了。
 
-![img](https://pic002.cnblogs.com/images/2011/63234/2011010219003441.jpg)
+![img](assets/2011010219003441.jpg)
 
 ##### 检查字符串是否存在的过程
 
@@ -1018,7 +1167,7 @@ def test_binary_search():
 
 #### 原理
 
-![img](https://images2017.cnblogs.com/blog/849589/201710/849589-20171015223238449-2146169197.gif)
+![img](assets/849589-20171015223238449-2146169197.gif)
 
 - 从第一个元素开始比较相邻的元素。如果第一个比第二个大，就交换它们的位置；
 - 对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对，这样在最后的元素应该会是最大的数；
@@ -1052,7 +1201,7 @@ def bubble_sort(seq):
 
 #### 原理
 
-![img](https://images2017.cnblogs.com/blog/849589/201710/849589-20171015224719590-1433219824.gif)
+![img](assets/849589-20171015224719590-1433219824.gif)
 
 1. 将序列分为无序区和有序区，初始状态的无序区为[0,..,,n-1]，有序区为空；
 2. 第i轮排序(轮数从0开始)开始时，当前有序区和无序区分别为[0..i]和[[i..n-1]。该轮排序将第1个元素[i]假设为无序区的最小值，从第二个元素开始比较选出当前无序区中最小的元素[k]，将它与无序区的第1个元素[i]交换，有序区增加1个元素，无序区减少一个元素；
@@ -1093,7 +1242,7 @@ def selection_sort(seq):
 
 #### 原理
 
-![img](https://images2017.cnblogs.com/blog/849589/201710/849589-20171015225645277-1151100000.gif)
+![img](assets/849589-20171015225645277-1151100000.gif)
 
 1. 假定序列的第一个元素已经有序；
 2. 取出下一个元素，在已经排序的元素序列中从后向前扫描；
@@ -1290,13 +1439,13 @@ Partition图示：
 
 **注意递归执行快排的序列不再包括前一次partition操作的pivot值。**
 
-![../_images/partitionB.png](http://interactivepython.org/runestone/static/pythonds/_images/partitionB.png)
+![../_images/partitionB.png](assets/partitionB.png)
 
 Partition操作：
 
 while True 无限循环，通过比较左右指针决定break结束循环还是交换指针所在位置的值。
 
-![../_images/partitionA.png](http://interactivepython.org/runestone/static/pythonds/_images/partitionA.png)
+![../_images/partitionA.png](assets/partitionA.png)
 
 ```python
 def partition(array, beg, end):
@@ -1390,7 +1539,7 @@ def findkth(array, beg, end, k):
 | 二叉树排序 | O(n^2^)        | O(n*log~2~n)   | O(n*log~2~n)   | 不稳定 | O(n)            |
 | 堆排序     | O(n*log~2~n)   | O(n*log~2~n)   | O(n*log~2~n)   | 不稳定 | O(1)            |
 
-## 树与二叉树
+## 14 树与二叉树
 
 二叉树的相关概念：
 
@@ -1403,15 +1552,15 @@ def findkth(array, beg, end, k):
 
 满二叉树：
 
-![img](https://python-data-structures-and-algorithms.readthedocs.io/zh/latest/14_%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91/full_binary_tree.png)
+![img](assets/full_binary_tree.png)
 
 完美二叉树：
 
-![img](https://python-data-structures-and-algorithms.readthedocs.io/zh/latest/14_%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91/perfect_binary_tree.png)
+![img](assets/perfect_binary_tree.png)
 
 完全二叉树：
 
-![img](https://python-data-structures-and-algorithms.readthedocs.io/zh/latest/14_%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91/complete_binary_tree.png)
+![img](assets/complete_binary_tree.png)
 
 ### 二叉树的表示
 
@@ -1935,7 +2084,7 @@ class PriorityQueue(object):
 - 所有 key 小于 V 的都被存储在 V 的左子树
 - 所有 key 大于 V 的都存储在 V 的右子树
 
-![img](https://python-data-structures-and-algorithms.readthedocs.io/zh/latest/17_%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/bst.png)
+![img](assets/bst.png)
 
 **如果中序遍历二叉树，输出的顺序正好是有序的。**
 
@@ -2158,7 +2307,7 @@ def remove(self, key):
 
 ### 时间复杂度分析
 
-![img](https://python-data-structures-and-algorithms.readthedocs.io/zh/latest/17_%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/bst_worstcase.png)
+![img](assets/bst_worstcase.png)
 
 平均来说时间复杂度和树的高度成正比为log(n)（**维持平衡二叉树的情况下**）， 但最坏情况下以上操作的时间复杂度都是 O(n)（树的结构退化）。
 
@@ -2348,7 +2497,7 @@ def insert(self, key, value):
 
 #### B 树
 
-![img](http://hi.csdn.net/attachment/201106/7/8394323_13074405906V6Q.jpg)
+![img](assets/8394323_13074405906V6Q.jpg)
 
 下面，拟下查找文件29的过程：
 
@@ -2847,3 +2996,10 @@ def prim(graph, start):
 | 堆算法        |                                 | heapq模块（最小堆）                                          |
 | 缓存算法      |                                 | functools.lru_cache(Least Recent Used, python3)              |
 
+## 20 参考
+
+- [Python 算法与数据结构视频教程](<https://python-data-structures-and-algorithms.readthedocs.io/zh/latest/>)
+- [Problem Solving with Algorithms and Data Structures using Python](<http://interactivepython.org/runestone/static/pythonds/index.html#problem-solving-with-algorithms-and-data-structures-using-python>)
+- [Graph Data Structure And Algorithms](<https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/>)
+- [算法图解](<https://book.douban.com/subject/26979890/>)
+- [数据结构与算法：Python语言描述](<https://book.douban.com/subject/26702568/>)
