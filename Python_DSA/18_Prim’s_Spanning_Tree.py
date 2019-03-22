@@ -137,16 +137,19 @@ class Graph:
 
 
 def prim(graph, start):
+    # 构造优先级队列
     pq = PriorityQueue()
     start.setDistance(0)
     pq_list = [(v, v.getDistance()) for v in graph]
     for v, priority in pq_list:
         pq.add_task(v, priority)
+    # 从队列中取出当前距离最小的顶点，更新其邻居节点的距离
     while not pq.is_empty():
         currentVert = pq.pop_task()
         for nextVert in currentVert.getConnections():
             newDist = currentVert.getWeight(nextVert)
             if nextVert in pq and newDist < nextVert.getDistance():
+                # 更新队列中节点的距离和父节点
                 nextVert.setDistance(newDist)
                 nextVert.setPred(currentVert)
                 pq.add_task(nextVert, newDist)
