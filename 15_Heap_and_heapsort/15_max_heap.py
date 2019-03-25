@@ -56,11 +56,13 @@ class MaxHeap(object):
 
     def _siftdown(self, ndx):
         left = ndx * 2 + 1
-        right = (ndx * 2) + 2
+        right = ndx * 2 + 2
         # 找出当前节点及左右子节点中的最大值，与当前节点交换位置，并递归地对换下去的节点执行siftdown操作
         largest = ndx
-        if left < self._count and self._elements[left] > self._elements[largest] and \
+        if left < self._count and self._elements[left] > self._elements[largest] and right < self._count and \
                 self._elements[left] >= self._elements[right]:
+            largest = left
+        elif left < self._count and self._elements[left] > self._elements[largest] and right >= self._count:
             largest = left
         elif right < self._count and self._elements[right] > self._elements[largest]:
             largest = right

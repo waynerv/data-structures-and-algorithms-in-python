@@ -58,8 +58,10 @@ class MinHeap(object):
         right = (ndx * 2) + 2
         # 找出当前节点及左右子节点中的最小值，与当前节点交换位置，并递归地对换下去的节点执行siftdown操作
         smallest = ndx
-        if left < self._count and self._elements[left] < self._elements[smallest] and \
+        if left < self._count and self._elements[left] < self._elements[smallest] and right < self._count and \
                 self._elements[left] <= self._elements[right]:
+            smallest = left
+        elif left < self._count and self._elements[left] < self._elements[smallest] and right >= self._count:
             smallest = left
         elif right < self._count and self._elements[right] < self._elements[smallest]:
             smallest = right
