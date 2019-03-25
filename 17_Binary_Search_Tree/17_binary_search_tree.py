@@ -143,7 +143,7 @@ class BST(object):
 
     def bst_max(self):
         node = self._bst_max_node(self.root)
-        return node if node else None
+        return node.value if node else None
 
     def _bst_insert_recursive(self, subtree, key, value):
         """插入并且返回根节点
