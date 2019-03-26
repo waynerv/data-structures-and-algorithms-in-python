@@ -212,57 +212,63 @@ class AVLTree(BST):
         3. 检查以a为根的子树是否失衡，失衡时做调整。
         4. 连接好调整后的子树，它可能该作为整棵树的根，或作为a原来的父节点的相应方向的子节点。（左或右节点）
         """
-        a = p = self.root  # a记录据插入位置最近的平衡因子非0节点，p为遍历的指针变量
-        if a is None:  # 若为空树，直接插入为根节点并返回
+        # 使用4个变量，分别记录插入位置最近的平衡因子非0节点、遍历的指针变量以及对应父节点
+        a = p = self.root  # a记录距插入位置最近的平衡因子非0节点，p为遍历的指针变量
+        # 若为空树，直接插入为根节点并返回
+        if a is None:
             self.root = AVLNode(key, value)
             return
-
         a_parent = p_parent = None  # 维持 a_parent, p_parent 分别为a, p 的父节点, a,p为根节点时父节点为None
-        while p is not None:  # 确定插入位置及最小非平衡树
+
+        # 使用p指针进行遍历，确定插入位置并记录最小非平衡树，p为None时到达插入位置
+        while p is not None:
             if key == p.key:  # key存在，修改value值并结束
                 p.value = value
                 return
             if p.bf != 0: # 更新a记录的平衡因子非0节点
                 a_parent, a = p_parent, p
-
-            p_parent = p # 移动 p 指针
+            # 移动 p 指针，并在移动前更新父节点位置
+            p_parent = p
             if key < p.key:
                 p = p.left
             else:
                 p = p.right
 
-        # 插入新节点，p_parent 是插入点的父节点， a_parent,a 记录最小非平衡树
+        # 插入新节点，p_parent是插入点的父节点， 此时的a_parent,a 记录最小非平衡树
         node = AVLNode(key, value)
         if key < p_parent.key:
             p_parent.left = node  # 作为左子节点插入
         else:
             p_parent.right = node  # 作为右子节点插入
 
-        # 新节点已插入， a是最小不平衡子树，将p的位置重置到a的子节点， d为插入新节点后a的平衡因子的变化值
-        if key < a.key:  # 新节点在a的左子树， 平衡因子+1
+        # 将p的位置重置到最小非平衡树a在插入新节点方向的子节点b， d为插入新节点后a的平衡因子的变化值
+        # 新节点在a的左子树， 平衡因子+1
+        if key < a.key:
             p = b = a.left
-            d = 1
-        else:  # 新节点在a的右子树， 平衡因子-1
+            bf_change = 1
+        # 新节点在a的右子树， 平衡因子-1
+        else:
             p = b = a.right
-            d = -1
+            bf_change = -1
 
         # 修改b到新节点路径上各节点的BF值，b为a的子节点
         while p != node:
-            if key < p.key:  # p的左子树增高
+            if key < p.key:  # 新节点插入在左侧，p的左子树增高（原bf值为0）
                 p.bf = 1
                 p = p.left
             else:  # p的右子树增高
                 p.bf = -1
                 p = p.right
         if a.bf == 0:  # a 的原BF为0，不会失衡，直接返回
-            a.bf = d
+            a.bf = bf_change
             return
-        if a.bf == -d:  # 新节点插入在较低子树里，不会失衡，直接返回
+        if a.bf == -bf_change:  # 新节点插入在较低子树里，不会失衡，直接返回
             a.bf = 0
             return
 
         # 新节点插入在较高子树，失衡，必须调整
-        if d == 1:  # 新节点在a的左子树
+        # 根据bf_change和b的bf值判断失衡类别，并进行调整，返回调整后的子树根节点
+        if bf_change == 1:  # 新节点在a的左子树
             if b.bf == 1:
                 b = AVLTree.LL(a, b)  # LL调整
             else:

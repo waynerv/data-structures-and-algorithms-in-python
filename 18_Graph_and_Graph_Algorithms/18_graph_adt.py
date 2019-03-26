@@ -1,57 +1,43 @@
 class Vertex:
     def __init__(self, key):
-        """
-        在类的构造方法中，直接初始化id（key字符串）以及邻接字典。
-        """
+        """在类的构造方法中，直接初始化id（key字符串）以及邻接字典。"""
         self.id = key
         self.connectedTo = {}
 
     def addNeighbor(self, nbr, weight=0):
-        """
-        添加邻接顶点，将邻接顶点对象以及相连边的权重作为参数传入
-        """
+        """添加邻接顶点，将邻接顶点对象以及相连边的权重作为参数传入"""
         self.connectedTo[nbr] = weight
 
     def __str__(self):
         return str(self.id) + ' connectedTo: ' + str([x.id for x in self.connectedTo])
 
     def getConnections(self):
-        """
-        返回顶点的所有邻接顶点（的key），注意此返回结果为生成器
-        """
+        """返回顶点的所有邻接顶点（的key），注意此返回结果为生成器"""
         return self.connectedTo.keys()
 
     def getId(self):
         return self.id
 
     def getWight(self, nbr):
-        """
-        通过邻接顶点对象在邻接字典中获取权重值
-        """
+        """通过邻接顶点对象在邻接字典中获取权重值"""
         return self.connectedTo[nbr]
 
 
 class Graph:
     def __init__(self):
-        """
-        在构造方法中初始化字典以及表示顶点个数的属性。
-        """
+        """在构造方法中初始化字典以及表示顶点个数的属性。"""
         self.vertList = {}
         self.numVertics = 0
 
     def addVertex(self, key):
-        """
-        构造并添加顶点到图中
-        """
+        """构造并添加顶点到图中"""
         self.numVertics += 1
         newVertex = Vertex(key)
         self.vertList[key] = newVertex
         return newVertex
 
     def getVertex(self, key):
-        """
-        通过顶点key获取顶点对象，不存在返回None
-        """
+        """通过顶点key获取顶点对象，不存在返回None"""
         if key in self.vertList:
             return self.vertList[key]
         else:
@@ -61,9 +47,7 @@ class Graph:
         return key in self.vertList
 
     def addEdge(self, start, end, wight=0):
-        """
-        添加从start顶点到end顶点的边并设置权重，若顶点在图中不存在则创建顶点并加入图中
-        """
+        """添加从start顶点到end顶点的边并设置权重，若顶点在图中不存在则创建顶点并加入图中"""
         if start not in self.vertList:
             nv = self.addVertex(start)
         if end not in self.vertList:
