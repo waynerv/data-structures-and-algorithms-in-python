@@ -2468,6 +2468,8 @@ def insert(self, key, value):
 
 ### B 树与B+ 树
 
+下文内容偏原理解释，准确描述参考[MySQL索引背后的数据结构及算法原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)。
+
 #### B 树
 
 ![img](assets/8394323_13074405906V6Q.jpg)
